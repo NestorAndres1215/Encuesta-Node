@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Votar Encuesta - <%= encuesta.titulo %></title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="/css/responderEncuesta.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1><i class="fas fa-poll fa-fw"></i> <%= encuesta.titulo %></h1>
+      </div>
+      <div class="content">
+        <form id="formVotar" method="POST" action="/votar/<%= encuesta.id %>">
+          <% preguntas.forEach(p => { %>
+          <div class="pregunta">
+            <p><%= p.texto %></p>
+            <% p.opciones.forEach(op => { %>
+            <div class="opcion">
+              <label>
+                <input
+                  type="radio"
+                  name="pregunta<%= p.id %>"
+                  value="<%= op.id %>"
+                  required
+                />
+                <%= op.texto %>
+              </label>
+            </div>
+            <% }) %>
+          </div>
+          <hr />
+          <% }) %>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-vote-yea btn-icon"></i> Votar
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

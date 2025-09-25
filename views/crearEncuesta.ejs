@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Encuesta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/crearEncuesta.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-poll fa-fw"></i> Crear Encuesta</h1>
+        </div>
+        
+        <div class="content">
+            <form id="formEncuesta" method="POST" action="/guardarEncuesta">
+                <div class="form-group">
+                    <input type="text" name="titulo" class="form-control" placeholder="Título de la encuesta" required>
+                </div>
+                
+                <div class="preguntas-container" id="preguntas">
+                    <!-- Las preguntas se cargarán dinámicamente aquí -->
+                    <div class="no-preguntas" id="noPreguntas">
+                        <i class="fas fa-question-circle fa-3x"></i>
+                        <p>No hay preguntas aún. Haz clic en '+ Pregunta' para agregar.</p>
+                    </div>
+                </div>
+                
+                <input type="hidden" name="preguntas" id="preguntasInput">
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="abrirModalPregunta()">
+                        <i class="fas fa-plus-circle btn-icon"></i> Agregar Pregunta
+                    </button>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save btn-icon"></i> Guardar Encuesta
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal para agregar pregunta -->
+    <div class="modal-backdrop" id="modalPregunta">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Agregar Pregunta</div>
+                <button type="button" class="modal-close" onclick="cerrarModalPregunta()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="textoPregunta">Texto de la pregunta:</label>
+                    <input type="text" id="textoPregunta" class="form-control" placeholder="Escribe tu pregunta aquí">
+                </div>
+                
+                <div class="opciones-container" id="opcionesContainer">
+                    <!-- Las opciones se cargarán dinámicamente aquí -->
+                </div>
+                
+                <button type="button" class="btn btn-secondary" onclick="agregarOpcion()">
+                    <i class="fas fa-plus btn-icon"></i> Agregar Opción
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="cerrarModalPregunta()">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarPregunta()">Guardar</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/js/crearEncuesta.js">
+      
+    </script>
+</body>
+</html>

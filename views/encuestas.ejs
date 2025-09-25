@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listado de Encuestas</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/encuesta.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1><i class="fas fa-poll-h"></i> Listado de Encuestas</h1>
+      </header>
+
+      <% if (encuestas && encuestas.length> 0) { %>
+      <div class="encuestas-grid">
+        <% encuestas.forEach(function(encuesta, index) { %>
+        <div class="encuesta-card">
+          <div class="encuesta-header">
+            <h3 class="encuesta-title"><%= encuesta.titulo %></h3>
+          </div>
+          <div class="encuesta-body">
+            <div class="encuesta-info">
+              <i class="fas fa-question-circle"></i>
+              <span>Encuesta #<%= index + 1 %></span>
+            </div>
+            <div class="encuesta-info">
+              <i class="fas fa-clipboard-list"></i>
+              <span>Preguntas disponibles</span>
+            </div>
+            <div class="encuesta-actions">
+              <form action="/responder/<%= encuesta.id %>" method="get">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-pen btn-icon"></i> Contestar
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+      <% } else { %>
+      <div class="no-encuestas">
+        <i class="fas fa-clipboard"></i>
+        <p>No hay encuestas disponibles en este momento.</p>
+        <a href="/crear" class="btn btn-primary">
+          <i class="fas fa-plus btn-icon"></i> Crear una encuesta
+        </a>
+      </div>
+      <% } %>
+
+      <a href="/crear" class="create-button">
+        <i class="fas fa-plus"></i>
+        <span class="tooltip">Crear nueva encuesta</span>
+      </a>
+
+      <footer class="footer">
+        Sistema de Encuestas &copy; 2025 | Todos los derechos reservados
+      </footer>
+    </div>
+  </body>
+</html>
